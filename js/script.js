@@ -9,7 +9,7 @@
 	// Load playlist <li><h6 class="main_tit">安静听完这一首</h6><p class="sub_tit">覃桢</p></li>
 	for (var i=0; i<playlist.length; i++){
 		var item = playlist[i];
-		$('#playlist').append('<li><h6 class=main_tit>'+item.singer+'</h6><p class=sub_tit>'+item.singer+'</p></li>');
+		$('#playlist').append('<li><h6 class=main_tit>'+item.name+'</h6><p class=sub_tit>'+item.singer+'</p></li>');
 	}
 
 	var time = new Date(),
@@ -141,9 +141,11 @@
 	var loadMusic = function(i){
 		var item = playlist[i];
 		
+		var timestate= item.timestate?item.timestate:"03:33";
+		
 		newaudio = $('<audio>').html('<source src="'+item.realFileURL+'"><source src="'+item.ogg+'">').appendTo('#player');
 		$('.cover').html('<img src="'+item.realImgURL+'" alt="'+item.album+'">');
-		$('.tag').html('<strong>'+item.title+'</strong><span class="artist">'+item.artist+'</span><span class="album">'+item.album+'</span>');
+		$('.tag').html('<strong style=" display:block; width:200px; height:25px; overflow:hidden;">'+item.name+'</strong><span class="artist">'+item.singer+'</span><span class="album">'+timestate+'</span>');
 		$('#playlist li').removeClass('playing').eq(i).addClass('playing');
 		audio = newaudio[0];
 		audio.volume = $('.mute').hasClass('enable') ? 0 : volume;
@@ -241,4 +243,3 @@
 	});
 };
 
-qcaudio(datajsmore());

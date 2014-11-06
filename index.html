@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="js/jquery-2.1.1.min.js"></script>
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/stylesheets/style.css" media="all">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>场景</title>
+
+<style>
+.initcj{
+	
+	width:100%;
+	height:100%;
+	
+	
+}
+.title{
+	
+	background-color:#c3121a;
+	color:white;
+	height:30px;
+	line-height:28px;
+	font-size:18px;
+	text-align:center;
+	
+}
+.cjli{
+	
+	font-size:18px;
+	text-align:center;
+	height:20px;
+	line-height:20px;
+	width:100%;
+	margin-top:10px;
+	color:#000;
+	cursor:pointer;
+}
+.cjli span{
+	
+	display:none;
+    visibility:hidden;
+	width:0;
+	height:0;
+
+}
+
+</style>
+<script>
+
+$(function(){
+	
+	$.ajax({
+		
+		type:"get",
+		
+		url:"server/init.php",
+		
+		datatype:"json",
+		
+		success: function(data){
+		
+		var item=data.songListType;
+		
+		
+		for(var i=0; i<item.length; i++){
+				
+				
+		$('#cj').append("<li class='cjli'><span>"+item[i].code +"</span>"+item[i].remark+"</li>");
+						
+		}
+		
+		$("#cj li").bind("click" , cj);
+		
+		},	
+		error:function(){
+			
+			
+		alert("操作不成功！")
+			
+			
+			},
+		})
+	
+})
+ 
+ function cj(){
+	 
+	 var num=parseInt($(this).find("span").html());
+	 
+	 window.location.href="changjing1.html?id="+num;
+	 
+	 
+}
+
+
+
+
+</script>
+
+</head>
+
+<body>
+
+<div class="initcj">
+<h2 class="title">音乐一号</h2>
+<ul id="cj">
+
+</ul>
+</div>
+</body>
+</html>

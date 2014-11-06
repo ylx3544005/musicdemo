@@ -6,7 +6,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/stylesheets/style.css" media="all">
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
-<title>QQ音乐</title>
+<title>场景歌单</title>
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>
@@ -215,73 +215,11 @@
          <div class="songlist">
            <div class="mod_song_list ui-refresh newlist">
            <ul id="playlist">
-                
-          <?php
-          
-		   $inum=1;
-		   
-		   function datalist($i=1){
-			   
-		   $realURL="http://112.124.44.10:8080/song1/api/cherrytime/v1/songs?songlistid=".$i ;
-		   
-           $handle=fopen($realURL, "r");
-		   
-		   $content="";
-		  
-		   
-		   while(!feof($handle)){
-			   
-			   
-			 $content.=fread($handle, 1000) ;   
-			 
-			   
-		  }
-           
 
-		    return $content;
-			
-		   fclose($handle);
-		   
-		   
-		   }
-		   
-		   
-           ?>
            
-          <script type="text/javascript">
-     
-          var datajs=function(num){
-				
-		  var num=parseInt(num);
-					
-		  var datalistt=<?=datalist()?>;
-		 
-		  return datalistt["data"]; 
-		  
-		   
-		  }
-		  
-		  
-		  function datajsmore(){
-		
-			  	  
-		 return datalistt["data"];
-			  
-			  
-			  
-		  }
-		  
-		  
-		   
-
-           </script>
-          
-   
-           
-           
-           </ul>  
+       </ul>  
     <div class="ui-refresh-down on"><span class="ui-refresh-icon"></span><span class="ui-refresh-label" 
-    onClick="javascript:datajsmore()">加载更多</span></div></div></div></div>
+    onClick="javascript:datajsmore()"></span></div></div></div></div>
 	</div>
     <div id="player">
 		<div class="cover"></div>
@@ -325,7 +263,60 @@
 	<script src="js/script.js"></script>
     <div class="gmu-media-detect" id="gmu-media-detect0"></div>
     
-         
+       <script type="text/javascript">
+		  
+		  
+		  $(function(){
+	
+			function url_split (url){	//  把 url 后的参数分割  返回 arr行
+						 
+			var url_arr		= new Array(); 
+		
+			if(! url){	url	= window.location.href;}//没有传参表示用现在的url的
+		
+			var urls_a		= url.split('?');
+		
+			if(! urls_a[1]) urls_a[1] = urls_a[0];  
+		
+			if(urls_a[1]){
+				
+			urls_a2 		= urls_a[1].split('&');
+			
+			for(key in urls_a2){
+				
+				urls_a3		= urls_a2[key].split('=');
+				
+				if(urls_a3[0] && urls_a3[1]){
+					
+					url_arr[urls_a3[0]] = urls_a3[1];
+					}
+				}
+			}
+			return url_arr;
+		 }
+	
+		var url_arr=url_split();
+		
+		$.ajax({
+		
+		type: "get",
+		
+		datatype:"json",
+		
+		url: "server/songs.php?songlistid="+url_arr["id"],
+		
+		success:function(data){
+				
+		var item=data.data;
+			
+	    qcaudio(item);
+		
+		}
+		
+		})
+	
+		})
+     </script>     
 
     </body>
     </html>

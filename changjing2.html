@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="js/jquery-2.1.1.min.js"></script>
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/stylesheets/style.css" media="all">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>场景2</title>
+
+<style>
+@media only screen and (min-width:320px) and (max-width: 480px){
+	
+  .cj1li{
+
+	
+  
+  }	
+  
+  .imgclass{
+	  
+	width: 150px;
+	height:150px; 
+	margin-left:5px;
+	  
+	  
+  }
+}
+.initcj{
+	
+	width:100%;
+	height:100%;
+	
+	
+	
+}
+.title{
+	
+	background-color:#c3121a;
+	color:white;
+	font-size:18px;
+	text-align:center;
+	
+}
+#cj2 .cj2li{
+	
+	float:left;
+	position:relative;
+	
+
+
+
+}
+.cj2li span{
+	
+	display:none;
+    visibility:hidden;
+	width:0;
+	height:0;
+
+}
+.imgclass{
+	
+	
+	
+	
+
+}
+.imgtext{
+	position:absolute;
+	bottom:20px;
+	left:15px;
+	color:#FFF;
+	z-index:10;
+	font-size:18px;
+	text-shadow: 1px 1px 1px #FF0000
+	
+}
+</style>
+<script>
+
+$(function(){
+	
+	function url_split (url){	//  把 url 后的参数分割  返回 arr行
+						 
+		var url_arr		= new Array(); 
+		
+		if(! url){	url	= window.location.href;}//没有传参表示用现在的url的
+		
+		var urls_a		= url.split('?');
+		
+		if(! urls_a[1]) urls_a[1] = urls_a[0];  
+		
+		if(urls_a[1]){
+			urls_a2 		= urls_a[1].split('&');
+			
+			for(key in urls_a2){
+				
+				urls_a3		= urls_a2[key].split('=');
+				
+				if(urls_a3[0] && urls_a3[1]){
+					
+					url_arr[urls_a3[0]] = urls_a3[1];
+				}
+			}
+		}
+		return url_arr;
+	}
+	
+	var url_arr=url_split();
+	 
+	 
+	$.ajax({
+		
+		type: "get",
+		
+		datatype:"json",
+		
+		url: "server/envSongList.php?code="+url_arr["id"],
+		
+		success:function(data){
+				
+		var item=data.data.listPageObject;
+			
+	    for(var i=0; i<item.length; i++){
+			
+		$('#cj2').append("<li class='cj2li'><span>"+item[i].id +"</span><img class='imgclass' src="+item[i].realIconURL+ " /><h3 class='imgtext'>"+item[i].name+"</h3></li>");
+
+		}
+	
+	    $("#cj2 li").bind("click" , cj);
+	
+			}
+		
+		})
+	
+
+})
+
+
+function cj(){
+	 
+	 var num=$(this).find("span").html();
+	 
+	 window.location.href="songlist.php?id="+num;
+	 
+	 
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="initcj">
+<h2 class="title">音乐一号</h2>
+<ul id="cj2">
+
+</ul>
+</div>
+
+</body>
+</html>
