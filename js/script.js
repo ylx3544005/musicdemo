@@ -142,7 +142,7 @@
 		var item = playlist[i];
 		
 		var timestate= item.timestate?item.timestate:"03:33";
-		
+
 		newaudio = $('<audio>').html('<source src="'+item.realFileURL+'"><source src="'+item.ogg+'">').appendTo('#player');
 		$('.cover').html('<img src="'+item.realImgURL+'" alt="'+item.album+'">');
 		$('.tag').html('<strong style=" display:block; width:200px; height:25px; overflow:hidden;">'+item.name+'</strong><span class="artist">'+item.singer+'</span><span class="album">'+timestate+'</span>');
@@ -156,6 +156,7 @@
 	}
 
 	loadMusic(currentTrack);
+	
 	$('.playback').on('click', function(){
 		if ($(this).hasClass('playing')){
 			pause();
@@ -201,7 +202,7 @@
        this.onclick=function(){
 		 
 	   $('audio').remove(); 
-		 //eval('(' + $(self).siblings('.hidecont').html() + ')')
+	   //eval('(' + $(self).siblings('.hidecont').html() + ')')
 	   var jsoncont=eval('(' + $(self).siblings('.hidecont').html() + ')');
 
 	   //if (isPlaying == true) play();

@@ -118,10 +118,14 @@
 .mobile-tuwen-ul-more a{
 	color:#4481C4;
 }
+
+
 </style>
 
 </head>
 <body>
+
+
 
     <div>
     <div class="mobile-tuwen-h2">
@@ -144,6 +148,9 @@
     </div>
     </div> 
   
+  
+  
+  
     <div>
     <div class="mobile-tuwen-h2">
         <span class="mobile-tuwen-wz">香格里拉</span>
@@ -158,7 +165,7 @@
         <img src="css/images/u=3313055982,3668831902&fm=21&gp=0.jpg" width="40px" height="40px" class="mobile-tuwen-bf"/>
     </div>   
     <div class="mobile-tuwen-tu">
-        <img src="css/images/70ad780ab5c0e88be4d10e2f8629715f.jpg"/>
+        <img class="mobileimg" src="css/images/70ad780ab5c0e88be4d10e2f8629715f.jpg"/>
     </div>
     <div class="mobile-tuwen-wen">
         <p class="mobile-tuwen-wen-p">专辑描叙文字专辑描叙文字专辑描叙文字专辑描叙文字专辑描叙文字专辑描叙文字专辑描叙文字专辑描叙文字专辑描叙文字专辑描叙文字专辑描叙文字专辑描叙文字 </p>
